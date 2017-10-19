@@ -8,10 +8,20 @@
     <artifactId>ajexp-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
+    <name>Ajexp</name>
+    <description>Ajexp - Java library for exporting data using annotations</description>
+
     <modules>
         <module>common</module>
         <module>excel</module>
     </modules>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.target>1.7</maven.compiler.target>

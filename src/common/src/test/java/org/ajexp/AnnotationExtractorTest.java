@@ -28,7 +28,7 @@ public class AnnotationExtractorTest extends Assert {
         assertNotNull(document);
         AjxName[] name = document.value();
         assertTrue(name != null && name.length == 1);
-        assertEquals(name[0].value(), "TestDocument");
+        assertEquals("TestDocument", name[0].value());
     }
 
     @Test
@@ -43,11 +43,11 @@ public class AnnotationExtractorTest extends Assert {
 
     private void testNameField(List<ColumnMeta> columnMetaList) {
         AjxColumn column = columnMetaList.get(1).getAnnotation();
-        assertEquals(column.columnOrder(), 2);
+        assertEquals(2, column.columnOrder());
         AjxName[] name = column.headerName();
         assertTrue(name != null && name.length == 1);
-        assertEquals(name[0].value(), "name");
-        assertEquals(name[0].locale(), AjxLocale.RU);
+        assertEquals("name", name[0].value());
+        assertEquals(AjxLocale.RU, name[0].locale());
     }
 
     private void testIdField(List<ColumnMeta> columnMetaList) {
@@ -55,7 +55,7 @@ public class AnnotationExtractorTest extends Assert {
         assertEquals(column.columnOrder(), 1);
         AjxName[] name = column.headerName();
         assertTrue(name != null && name.length == 1);
-        assertEquals(name[0].value(), "id");
-        assertEquals(name[0].locale(), AjxLocale.ENGLISH);
+        assertEquals("id", name[0].value());
+        assertEquals(AjxLocale.ENGLISH, name[0].locale());
     }
 }
