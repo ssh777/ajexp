@@ -12,8 +12,8 @@
     <description>Ajexp - Java library for exporting data using annotations</description>
 
     <modules>
-        <module>src/common</module>
-        <module>src/excel</module>
+        <module>common</module>
+        <module>excel</module>
     </modules>
 
     <licenses>
