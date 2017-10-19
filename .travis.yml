@@ -1,3 +1,7 @@
 language: java
 sudo: false
-script: mvn clean verify -f ./src
+script:
+  - mvn clean verify -f ./src
+  - mvn cobertura:cobertura -f ./src
+after_success:
+  - "bash <(curl -s https://codecov.io/bash)"
