@@ -26,12 +26,18 @@ public class AbstractExporterTest extends Assert {
                 new SimpleDTO(200L, "second"),
                 new SimpleDTO(300L, "third")
         );
-        exporter = new SimpleExporter(data);
+        exporter = new SimpleExporter(data, SimpleDTO.class);
     }
 
     @Test
     public void testParamsValidation(){
         assertTrue(exporter.isValidParams());
+    }
+
+    @Test
+    public void testExporterWithLocale(){
+        SimpleExporter ex = new SimpleExporter(data, SimpleDTO.class, AjxLocale.ENGLISH);
+        assertEquals(ex.getLocale(), AjxLocale.ENGLISH);
     }
 
     @Test

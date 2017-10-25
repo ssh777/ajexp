@@ -1,5 +1,6 @@
 package org.ajexp;
 
+import org.ajexp.dto.SimpleDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,12 +13,12 @@ public class AjxExceptionTest extends Assert {
 
     @Test(expected = AjxException.class)
     public void test11() throws AjxException {
-        new SimpleExporter(null).exportData(null);
+        new SimpleExporter(null, null).exportData(null);
     }
 
     @Test(expected = AjxException.class)
     public void test12() throws AjxException {
-        new SimpleExporter(Collections.EMPTY_LIST).exportData(null);
+        new SimpleExporter(Collections.EMPTY_LIST, SimpleDTO.class).exportData(null);
     }
 
     @Test(expected = AjxException.class)

@@ -11,8 +11,12 @@ import java.util.List;
  * Created by SSh on 19.10.2017.
  */
 public class SimpleExporter extends AbstractExporter {
-    public SimpleExporter(Collection<?> data) {
-        super(data, SimpleDTO.class, AjxLocale.ENGLISH);
+    public SimpleExporter(Collection<?> data, Class clazz) {
+        super(data, clazz);
+    }
+
+    public SimpleExporter(Collection<?> data, Class clazz, AjxLocale locale) {
+        super(data, clazz, locale);
     }
 
     @Override

@@ -18,7 +18,6 @@ public abstract class AbstractExporter implements AjxExporter {
     protected Collection<?> data;
     protected Class clazz;
     protected AjxLocale locale;
-    protected OutputStream outputStream;
 
     public AbstractExporter(Collection<?> data, Class clazz) {
         this(data, clazz, AjxLocale.NULL);
@@ -68,4 +67,16 @@ public abstract class AbstractExporter implements AjxExporter {
 
     protected abstract int exportInternal(OutputStream outputStream, AjxDocument documentMeta, List<ColumnMeta> columnsMeta)
             throws AjxException;
+
+    public Collection<?> getData() {
+        return data;
+    }
+
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public AjxLocale getLocale() {
+        return locale;
+    }
 }
