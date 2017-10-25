@@ -121,11 +121,12 @@ public abstract class AbstractExcelExporter extends AbstractExporter {
         int colCount = startCol;
         for (ColumnMeta meta : excelColumns) {
             AjxColumn annotation = meta.getAnnotation();
-            String headerLabel = (parent != null ? parent : "")
-                    + getLocalizedName(annotation.headerName(), locale);
+            String localizedHeaderName = getLocalizedName(annotation.headerName(), locale);
+            String headerLabel = (parent != null && !parent.isEmpty() ? parent : "")
+                    + (localizedHeaderName != null && !localizedHeaderName.isEmpty() ? localizedHeaderName : "");
             if (annotation.complexType() && meta.getSubColumns() != null) {
                 colCount = writeHeaders(workbook, colCount, meta.getSubColumns(),
-                        headerLabel + (parent != null ? "." : ""), headerRow, locale);
+                        headerLabel + (parent != null && !parent.isEmpty() ? "." : ""), headerRow, locale);
             }
             else {
                 Cell cell = headerRow.createCell(colCount++);
