@@ -15,6 +15,9 @@ public class SimpleDTO {
 
     private String name;
 
+    @AjxColumn(headerName = {}, columnOrder = 3, complexType = true)
+    private SimpleEnum type;
+
     public SimpleDTO() {
     }
 

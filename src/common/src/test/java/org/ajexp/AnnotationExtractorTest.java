@@ -35,10 +35,11 @@ public class AnnotationExtractorTest extends Assert {
     public void testColumnMeta() {
         List<ColumnMeta> columnMetaList = new AnnotationExtractor(clazz).getColumnMeta();
         assertNotNull(columnMetaList);
-        assertTrue(columnMetaList.size() == 2);
+        assertTrue(columnMetaList.size() == 3);
         assertNotNull(columnMetaList.get(0).getAnnotation());
         testIdField(columnMetaList);
         testNameField(columnMetaList);
+        testComplexTypeField(columnMetaList);
     }
 
     private void testNameField(List<ColumnMeta> columnMetaList) {
@@ -57,5 +58,22 @@ public class AnnotationExtractorTest extends Assert {
         assertTrue(name != null && name.length == 1);
         assertEquals("id", name[0].value());
         assertEquals(AjxLocale.ENGLISH, name[0].locale());
+    }
+
+    private void testComplexTypeField(List<ColumnMeta> columnMetaList) {
+        ColumnMeta columnMeta = columnMetaList.get(2);
+        AjxColumn columnAnnotation = columnMeta.getAnnotation();
+        assertEquals(columnAnnotation.columnOrder(), 3);
+        assertTrue(columnAnnotation.complexType());
+        AjxName[] name = columnAnnotation.headerName();
+        assertTrue(name.length == 0);
+        List<ColumnMeta> subColumns = columnMeta.getSubColumns();
+        assertNotNull(subColumns);
+        assertTrue(subColumns.size() == 1);
+        ColumnMeta subColumn = subColumns.get(0);
+        AjxColumn subColumnAnnotation = subColumn.getAnnotation();
+        AjxName[] subName = subColumnAnnotation.headerName();
+        assertEquals("type", subName[0].value());
+        assertEquals(AjxLocale.ENGLISH, subName[0].locale());
     }
 }
