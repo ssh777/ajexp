@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
 /**
  * Created by SSh on 25.10.2017.
  */
-public class ExporterTests extends Assert {
+public class ExportersTest extends Assert {
     private List<SimpleDTO> data;
 
     @Before
@@ -40,9 +38,23 @@ public class ExporterTests extends Assert {
     }
 
     @Test
-    public void testExport() throws AjxException {
+    public void testHSSFExport() throws AjxException {
+        testExporter(new HSSFExporter(data, SimpleDTO.class));
+    }
+
+    @Test
+    public void testXSSFExport() throws AjxException {
+        testExporter(new XSSFExporter(data, SimpleDTO.class));
+    }
+
+    @Test
+    public void testSXSSFExport() throws AjxException {
+        testExporter(new SXSSFExporter(data, SimpleDTO.class));
+    }
+
+    private void testExporter(AbstractExcelExporter excelExporter) throws AjxException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        new HSSFExporter(data, SimpleDTO.class).exportData(os);
+        excelExporter.exportData(os);
         assertTrue(os.size() > 0);
     }
 }

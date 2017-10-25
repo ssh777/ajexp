@@ -38,11 +38,7 @@ public abstract class AbstractExcelExporter extends AbstractExporter {
     @Override
     protected int exportInternal(OutputStream outputStream, AjxDocument documentMeta, List<ColumnMeta> columnsMeta) throws AjxException {
         try (Workbook workbook = createWorkbook()) {
-            Sheet sheet;
-            if (documentMeta == null)
-                sheet = workbook.createSheet();
-            else
-                sheet = workbook.createSheet(getLocalizedName(documentMeta.value(), locale));
+            Sheet sheet = createSheet(documentMeta, workbook);
 
             int rowCount = 0;
             int colCount = 0;
@@ -66,6 +62,17 @@ public abstract class AbstractExcelExporter extends AbstractExporter {
         } catch (IOException | IllegalAccessException | InvocationTargetException e) {
             throw new AjxException(e);
         }
+    }
+
+    protected Sheet createSheet(AjxDocument documentMeta, Workbook workbook) {
+        Sheet sheet;
+        if (documentMeta != null && getLocalizedName(documentMeta.value(), locale) != null) {
+            sheet = workbook.createSheet(getLocalizedName(documentMeta.value(), locale));
+        }
+        else {
+            sheet = workbook.createSheet();
+        }
+        return sheet;
     }
 
     private void adjustColumnsWidth(List<ColumnMeta> columnsMeta, Sheet sheet, int colCount) {
@@ -185,5 +192,6 @@ public abstract class AbstractExcelExporter extends AbstractExporter {
     private void createEmptyCell(int colIndex, Row dataRow, CellStyle dataStyle) {
         Cell cell = dataRow.createCell(colIndex);
         cell.setCellStyle(dataStyle);
+        cell.setCellValue("");
     }
 }
