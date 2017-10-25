@@ -12,7 +12,7 @@ import org.ajexp.annotations.AjxName;
 public class SimpleDTO {
     @AjxColumn(headerName = @AjxName(value = "id", locale = AjxLocale.ENGLISH), columnOrder = 1)
     private Long id;
-    @AjxColumn(headerName = @AjxName(value = "name", locale = AjxLocale.RU), columnOrder = 2)
+
     private String name;
 
     public SimpleDTO() {
@@ -31,6 +31,7 @@ public class SimpleDTO {
         this.id = id;
     }
 
+    @AjxColumn(headerName = @AjxName(value = "name", locale = AjxLocale.RU), columnOrder = 2)
     public String getName() {
         return name;
     }
