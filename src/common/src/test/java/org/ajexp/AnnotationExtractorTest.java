@@ -43,18 +43,21 @@ public class AnnotationExtractorTest extends Assert {
     }
 
     private void testNameField(List<ColumnMeta> columnMetaList) {
-        AjxColumn column = columnMetaList.get(1).getAnnotation();
-        assertEquals(2, column.columnOrder());
-        AjxName[] name = column.headerName();
+        ColumnMeta columnMeta = columnMetaList.get(1);
+        AjxColumn columnAnnotation = columnMeta.getAnnotation();
+        assertEquals(2, columnAnnotation.columnOrder());
+        AjxName[] name = columnAnnotation.headerName();
         assertTrue(name != null && name.length == 1);
         assertEquals("name", name[0].value());
         assertEquals(AjxLocale.RU, name[0].locale());
+        assertFalse(columnMeta.isFormatted());
     }
 
     private void testIdField(List<ColumnMeta> columnMetaList) {
-        AjxColumn column = columnMetaList.get(0).getAnnotation();
-        assertEquals(column.columnOrder(), 1);
-        AjxName[] name = column.headerName();
+        ColumnMeta columnMeta = columnMetaList.get(0);
+        AjxColumn columnAnnotation = columnMeta.getAnnotation();
+        assertEquals(columnAnnotation.columnOrder(), 1);
+        AjxName[] name = columnAnnotation.headerName();
         assertTrue(name != null && name.length == 1);
         assertEquals("id", name[0].value());
         assertEquals(AjxLocale.ENGLISH, name[0].locale());
