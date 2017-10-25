@@ -38,6 +38,8 @@ public class AbstractExporterTest extends Assert {
     public void testExporterWithLocale(){
         SimpleExporter ex = new SimpleExporter(data, SimpleDTO.class, AjxLocale.ENGLISH);
         assertEquals(ex.getLocale(), AjxLocale.ENGLISH);
+        assertEquals(ex.getData(), data);
+        assertEquals(ex.getClazz(), SimpleDTO.class);
     }
 
     @Test
