@@ -54,7 +54,8 @@ public class ExportersTest extends Assert {
 
     private void testExporter(AbstractExcelExporter excelExporter) throws AjxException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        excelExporter.exportData(os);
+        int rowCount = excelExporter.exportData(os);
+        assertEquals(excelExporter.getData().size() + 1, rowCount);
         assertTrue(os.size() > 0);
     }
 }
